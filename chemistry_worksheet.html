@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Stoichiometry Worksheet - Student Edition</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .worksheet-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        /* Navigation/Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .toc-link {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: block;
+        }
+        
+        .toc-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Main Content Area */
+        .content {
+            padding: 30px;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px 30px;
+            margin: 30px -30px 30px -30px;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Problem Card Styles */
+        .problem-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .problem-card:hover {
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .problem-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .problem-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .problem-title {
+            color: #333;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        .problem-content {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .problem-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* Equation Styles */
+        .equation-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        /* Solution Toggle Styles */
+        .solution-container {
+            margin-top: 20px;
+        }
+        
+        .solution-toggle {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(17, 153, 142, 0.3);
+        }
+        
+        .solution-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(17, 153, 142, 0.4);
+        }
+        
+        .solution-toggle::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+        
+        details[open] .solution-toggle::after {
+            transform: rotate(180deg);
+        }
+        
+        .solution-content {
+            background: linear-gradient(135deg, #e0f7f4 0%, #f0fff4 100%);
+            border: 2px solid #11998e;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 25px;
+            margin-top: -10px;
+        }
+        
+        .solution-content strong {
+            color: #11998e;
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .solution-steps {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #11998e;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        
+        /* Difficulty Badges */
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .difficulty-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .info-box strong {
+            color: #1976d2;
+        }
+        
+        /* Tips Box */
+        .tip-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .tip-box::before {
+            content: '💡 Tip: ';
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section-header {
+                margin: 20px -20px 20px -20px;
+                font-size: 1.4em;
+                padding: 15px 20px;
+            }
+            
+            .problem-card {
+                padding: 20px;
+            }
+            
+            .problem-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+            
+            .problem-title {
+                font-size: 1.2em;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .worksheet-container {
+                box-shadow: none;
+            }
+            
+            .toc {
+                display: none;
+            }
+            
+            .solution-toggle {
+                display: none;
+            }
+            
+            details {
+                display: none;
+            }
+            
+            .problem-card {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    <!-- Header -->
+    <div class="header">
+        <h1>🧪 Advanced Chemistry Worksheet</h1>
+        <p>Stoichiometry and Quantitative Analysis</p>
+    </div>
+    
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>📋 Quick Navigation</h2>
+        <div class="toc-grid">
+            <a href="#section-a" class="toc-link">Section A: Basic Problems</a>
+            <a href="#section-b" class="toc-link">Section B: Advanced Problems</a>
+            <a href="#problem-1" class="toc-link">Problem 1</a>
+            <a href="#problem-7" class="toc-link">Problem 7</a>
+            <a href="#problem-14" class="toc-link">Problem 14</a>
+            <a href="#problem-20" class="toc-link">Problem 20</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content">
+        
+        <h2 class="section-header" id="section-a">Section A: Basic Stoichiometry Problems</h2>
+        
+        <!-- Problem 1 -->
+        <div class="problem-card" id="problem-1">
+            <div class="problem-header">
+                <div class="problem-number">1</div>
+                <div class="problem-title">LiOH Production</div>
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </div>
+            <div class="problem-content">
+                <p>Determine the mass of lithium hydroxide (\(\text{LiOH}\)) produced when \(0.38 \text{ g}\) of lithium nitride (\(\text{Li}_3\text{N}\)) reacts with water according to the following equation:</p>
+                <div class="equation-box">
+                    $$\text{Li}_3\text{N} + 3\text{H}_2\text{O} \longrightarrow \text{NH}_3 + 3\text{LiOH}$$
+                </div>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 1</strong>
+                    <div class="solution-steps">$$\text{Li}_3\text{N} + 3\text{H}_2\text{O} \longrightarrow \text{NH}_3 + 3\text{LiOH}$$
+
+$$ 0.38 \text{ g } \text{Li}_3\text{N} \times \frac{1 \text{ mol } \text{Li}_3\text{N}}{35.0 \text{ g}} \times \frac{3 \text{ mol } \text{LiOH}}{1 \text{ mol } \text{Li}_3\text{N}} \times \frac{23.95 \text{ g } \text{LiOH}}{1 \text{ mol } \text{LiOH}}$$
+
+$$\approx \mathbf{0.78 \text{ g } \text{LiOH}}$$</div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 2 -->
+        <div class="problem-card" id="problem-2">
+            <div class="problem-header">
+                <div class="problem-number">2</div>
+                <div class="problem-title">NaCl Production</div>
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of sodium chloride (\(\text{NaCl}\)) is produced when chlorine (\(\text{Cl}_2\)) reacts with \(0.29 \text{ g}\) of sodium iodide (\(\text{NaI}\))? (The products are \(\text{NaCl}\) and iodine, \(\text{I}_2\).)</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 2</strong>
+                    <div class="solution-steps">$$\text{Cl}_2 + 2\text{NaI} \longrightarrow 2\text{NaCl} + \text{I}_2$$
+
+$$ 0.29 \text{ g } \text{NaI} \times \frac{1 \text{ mol } \text{NaI}}{149.89 \text{ g}} \times \frac{2 \text{ mol } \text{NaCl}}{2 \text{ mol } \text{NaI}} \times \frac{58.44 \text{ g } \text{NaCl}}{1 \text{ mol } \text{NaCl}}$$
+
+$$\approx \mathbf{0.11 \text{ g } \text{NaCl}}$$</div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 3 -->
+        <div class="problem-card" id="problem-3">
+            <div class="problem-header">
+                <div class="problem-number">3</div>
+                <div class="problem-title">CO₂ Production</div>
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </div>
+            <div class="problem-content">
+                <p>Determine the mass of carbon dioxide (\(\text{CO}_2\)) produced when \(0.85 \text{ g}\) of butane (\(\text{C}_4\text{H}_{10}\)) reacts with oxygen according to the following equation:</p>
+                <div class="equation-box">
+                    $$2\text{C}_4\text{H}_{10} + 13\text{O}_2 \longrightarrow 8\text{CO}_2 + 10\text{H}_2\text{O}$$
+                </div>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 3</strong>
+                    <div class="solution-steps">$$2\text{C}_4\text{H}_{10} + 13\text{O}_2 \longrightarrow 8\text{CO}_2 + 10\text{H}_2\text{O}$$
+
+$$ 0.85 \text{ g } \text{C}_4\text{H}_{10} \times \frac{1 \text{ mol } \text{C}_4\text{H}_{10}}{58.12 \text{ g}} \times \frac{8 \text{ mol } \text{CO}_2}{2 \text{ mol } \text{C}_4\text{H}_{10}} \times \frac{44.01 \text{ g } \text{CO}_2}{1 \text{ mol } \text{CO}_2}$$
+
+$$\approx \mathbf{2.6 \text{ g } \text{CO}_2}$$</div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 4 -->
+        <div class="problem-card" id="problem-4">
+            <div class="problem-header">
+                <div class="problem-number">4</div>
+                <div class="problem-title">Antimony Production</div>
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </div>
+            <div class="problem-content">
+                <p>Determine the mass of antimony (\(\text{Sb}\)) produced when \(0.46 \text{ g}\) of antimony(III) oxide (\(\text{Sb}_2\text{O}_3\)) reacts with carbon (\(\text{C}\)) according to the following equation:</p>
+                <div class="equation-box">
+                    $$\text{Sb}_2\text{O}_3 + 3\text{C} \longrightarrow 2\text{Sb} + 3\text{CO}$$
+                </div>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 4</strong>
+                    <div class="solution-steps">$$\text{Sb}_2\text{O}_3 + 3\text{C} \longrightarrow 2\text{Sb} + 3\text{CO}$$
+
+$$ 0.46 \text{ g } \text{Sb}_2\text{O}_3 \times \frac{1 \text{ mol } \text{Sb}_2\text{O}_3}{291.52 \text{ g}} \times \frac{2 \text{ mol } \text{Sb}}{1 \text{ mol } \text{Sb}_2\text{O}_3} \times \frac{121.76 \text{ g } \text{Sb}}{1 \text{ mol } \text{Sb}}$$
+
+$$\approx \mathbf{0.38 \text{ g } \text{Sb}}$$</div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 5 -->
+        <div class="problem-card" id="problem-5">
+            <div class="problem-header">
+                <div class="problem-number">5</div>
+                <div class="problem-title">H₂O₂ Decomposition</div>
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of hydrogen peroxide (\(\text{H}_2\text{O}_2\)) must decompose to produce \(0.77 \text{ g}\) of water (\(\text{H}_2\text{O}\))? (Products are water and oxygen gas.)</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 5</strong>
+                    <div class="solution-steps">$$2\text{H}_2\text{O}_2 \longrightarrow 2\text{H}_2\text{O} + \text{O}_2$$
+
+$$ 0.77 \text{ g } \text{H}_2\text{O} \times \frac{1 \text{ mol } \text{H}_2\text{O}}{18.02 \text{ g}} \times \frac{2 \text{ mol } \text{H}_2\text{O}_2}{2 \text{ mol } \text{H}_2\text{O}} \times \frac{34.01 \text{ g } \text{H}_2\text{O}_2}{1 \text{ mol } \text{H}_2\text{O}_2}$$
+
+$$\approx \mathbf{1.5 \text{ g } \text{H}_2\text{O}_2}$$</div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 6 -->
+        <div class="problem-card" id="problem-6">
+            <div class="problem-header">
+                <div class="problem-number">6</div>
+                <div class="problem-title">CO Reaction</div>
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of carbon monoxide (\(\text{CO}\)) must react with oxygen (\(\text{O}_2\)) to produce \(0.69 \text{ g}\) of carbon dioxide (\(\text{CO}_2\))?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 6</strong>
+                    <div class="solution-steps">$$2\text{CO} + \text{O}_2 \longrightarrow 2\text{CO}_2$$
+
+$$ 0.69 \text{ g } \text{CO}_2 \times \frac{1 \text{ mol } \text{CO}_2}{44.01 \text{ g}} \times \frac{2 \text{ mol } \text{CO}}{2 \text{ mol } \text{CO}_2} \times \frac{28.01 \text{ g } \text{CO}}{1 \text{ mol } \text{CO}}$$
+
+$$\approx \mathbf{0.44 \text{ g } \text{CO}}$$</div>
+                </div>
+            </details>
+        </div>
+        
+        <div class="info-box">
+            <strong>💡 Limiting Reagent Problems Ahead!</strong><br>
+            For problems 7-13, remember: The limiting reagent is the reactant that runs out first and determines the amount of product formed. Always calculate the theoretical yield from each reactant and choose the smaller value!
+        </div>
+        
+        <!-- Problem 7 -->
+        <div class="problem-card" id="problem-7">
+            <div class="problem-header">
+                <div class="problem-number">7</div>
+                <div class="problem-title">Limiting Reagent (Precipitation)</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>Identify the limiting reagent when \(65.14 \text{ g}\) of calcium chloride (\(\text{CaCl}_2\)) reacts with \(74.68 \text{ g}\) of sodium carbonate (\(\text{Na}_2\text{CO}_3\)) to produce calcium carbonate (\(\text{CaCO}_3\)) and sodium chloride (\(\text{NaCl}\)).</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 7</strong>
+                    <div class="solution-steps">$$\text{CaCl}_2 + \text{Na}_2\text{CO}_3 \longrightarrow \text{CaCO}_3 + 2\text{NaCl}$$
+
+Mass NaCl from CaCl₂:
+$$ 65.14 \text{ g } \text{CaCl}_2 \times \frac{1 \text{ mol } \text{CaCl}_2}{110.98 \text{ g}} \times \frac{2 \text{ mol } \text{NaCl}}{1 \text{ mol } \text{CaCl}_2} \times \frac{58.44 \text{ g } \text{NaCl}}{1 \text{ mol } \text{NaCl}}$$
+$$\approx 68.62 \text{ g } \text{NaCl}$$
+
+Mass NaCl from Na₂CO₃:
+$$ 74.68 \text{ g } \text{Na}_2\text{CO}_3 \times \frac{1 \text{ mol } \text{Na}_2\text{CO}_3}{105.99 \text{ g}} \times \frac{2 \text{ mol } \text{NaCl}}{1 \text{ mol } \text{Na}_2\text{CO}_3} \times \frac{58.44 \text{ g } \text{NaCl}}{1 \text{ mol } \text{NaCl}}$$
+$$\approx 82.47 \text{ g } \text{NaCl}$$
+
+<strong>Conclusion: CaCl₂ is the limiting reagent (produces less product).</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 8 -->
+        <div class="problem-card" id="problem-8">
+            <div class="problem-header">
+                <div class="problem-number">8</div>
+                <div class="problem-title">Limiting Reagent (IF₅ and SO₂)</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>Identify the limiting reactant when \(4.687 \text{ g}\) of sulfur tetrafluoride (\(\text{SF}_4\)) reacts with \(6.281 \text{ g}\) of diiodine pentoxide (\(\text{I}_2\text{O}_5\)) to produce iodine pentafluoride (\(\text{IF}_5\)) and sulfur dioxide (\(\text{SO}_2\)).</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 8</strong>
+                    <div class="solution-steps">$$5\text{SF}_4 + 2\text{I}_2\text{O}_5 \longrightarrow 4\text{IF}_5 + 5\text{SO}_2$$
+
+Mass SO₂ from SF₄ (MM ≈ 108.06 g/mol):
+$$ 4.687 \text{ g } \text{SF}_4 \times \frac{1 \text{ mol } \text{SF}_4}{108.06 \text{ g}} \times \frac{5 \text{ mol } \text{SO}_2}{5 \text{ mol } \text{SF}_4} \times \frac{64.07 \text{ g } \text{SO}_2}{1 \text{ mol } \text{SO}_2}$$
+$$\approx 2.775 \text{ g } \text{SO}_2$$
+
+Mass SO₂ from I₂O₅ (MM ≈ 333.81 g/mol):
+$$ 6.281 \text{ g } \text{I}_2\text{O}_5 \times \frac{1 \text{ mol } \text{I}_2\text{O}_5}{333.81 \text{ g}} \times \frac{5 \text{ mol } \text{SO}_2}{2 \text{ mol } \text{I}_2\text{O}_5} \times \frac{64.07 \text{ g } \text{SO}_2}{1 \text{ mol } \text{SO}_2}$$
+$$\approx 3.011 \text{ g } \text{SO}_2$$
+
+<strong>Conclusion: SF₄ is the limiting reactant.</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 9 -->
+        <div class="problem-card" id="problem-9">
+            <div class="problem-header">
+                <div class="problem-number">9</div>
+                <div class="problem-title">CrCl₃ Production</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>If \(4.1 \text{ g}\) of chromium (\(\text{Cr}\)) is heated with \(9.3 \text{ g}\) of chlorine gas (\(\text{Cl}_2\)), what mass of chromium(III) chloride (\(\text{CrCl}_3\)) will be produced?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 9</strong>
+                    <div class="solution-steps">$$2\text{Cr} + 3\text{Cl}_2 \longrightarrow 2\text{CrCl}_3$$
+
+Mass CrCl₃ from Cr (MM ≈ 52.00 g/mol):
+$$ 4.1 \text{ g } \text{Cr} \times \frac{1 \text{ mol } \text{Cr}}{52.00 \text{ g}} \times \frac{2 \text{ mol } \text{CrCl}_3}{2 \text{ mol } \text{Cr}} \times \frac{158.36 \text{ g } \text{CrCl}_3}{1 \text{ mol } \text{CrCl}_3}$$
+$$\approx 12.5 \text{ g } \text{CrCl}_3$$
+
+Mass CrCl₃ from Cl₂:
+$$ 9.3 \text{ g } \text{Cl}_2 \times \frac{1 \text{ mol } \text{Cl}_2}{70.91 \text{ g}} \times \frac{2 \text{ mol } \text{CrCl}_3}{3 \text{ mol } \text{Cl}_2} \times \frac{158.36 \text{ g } \text{CrCl}_3}{1 \text{ mol } \text{CrCl}_3}$$
+$$\approx 13.8 \text{ g } \text{CrCl}_3$$
+
+<strong>Conclusion: Cr is the limiting reagent, producing 13 g CrCl₃ (2 sig figs).</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 10 -->
+        <div class="problem-card" id="problem-10">
+            <div class="problem-header">
+                <div class="problem-number">10</div>
+                <div class="problem-title">SO₂ Production (S₈ and O₂)</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of sulfur dioxide (\(\text{SO}_2\)) is produced from the reaction between \(31.5 \text{ g}\) of octasulfur (\(\text{S}_8\)) and \(8.65 \text{ g}\) of oxygen gas (\(\text{O}_2\))?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 10</strong>
+                    <div class="solution-steps">$$\text{S}_8 + 8\text{O}_2 \longrightarrow 8\text{SO}_2$$
+
+Mass SO₂ from O₂:
+$$ 8.65 \text{ g } \text{O}_2 \times \frac{1 \text{ mol } \text{O}_2}{32.00 \text{ g}} \times \frac{8 \text{ mol } \text{SO}_2}{8 \text{ mol } \text{O}_2} \times \frac{64.07 \text{ g } \text{SO}_2}{1 \text{ mol } \text{SO}_2}$$
+$$\approx \mathbf{17.3 \text{ g } \text{SO}_2}$$
+
+Mass SO₂ from S₈:
+$$ 31.5 \text{ g } \text{S}_8 \times \frac{1 \text{ mol } \text{S}_8}{256.56 \text{ g}} \times \frac{8 \text{ mol } \text{SO}_2}{1 \text{ mol } \text{S}_8} \times \frac{64.07 \text{ g } \text{SO}_2}{1 \text{ mol } \text{SO}_2}$$
+$$\approx 63.0 \text{ g } \text{SO}_2$$
+
+<strong>Conclusion: O₂ is the limiting reagent, producing 17.3 g SO₂.</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 11 -->
+        <div class="problem-card" id="problem-11">
+            <div class="problem-header">
+                <div class="problem-number">11</div>
+                <div class="problem-title">SO₃ Production</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of sulfur trioxide (\(\text{SO}_3\)) is produced from the reaction of \(12.4 \text{ g}\) of sulfur dioxide (\(\text{SO}_2\)) and \(3.45 \text{ g}\) of oxygen gas (\(\text{O}_2\))?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 11</strong>
+                    <div class="solution-steps">$$2\text{SO}_2 + \text{O}_2 \longrightarrow 2\text{SO}_3$$
+
+Mass SO₃ from SO₂:
+$$ 12.4 \text{ g } \text{SO}_2 \times \frac{1 \text{ mol } \text{SO}_2}{64.07 \text{ g}} \times \frac{2 \text{ mol } \text{SO}_3}{2 \text{ mol } \text{SO}_2} \times \frac{80.06 \text{ g } \text{SO}_3}{1 \text{ mol } \text{SO}_3}$$
+$$\approx \mathbf{15.5 \text{ g } \text{SO}_3}$$
+
+Mass SO₃ from O₂:
+$$ 3.45 \text{ g } \text{O}_2 \times \frac{1 \text{ mol } \text{O}_2}{32.00 \text{ g}} \times \frac{2 \text{ mol } \text{SO}_3}{1 \text{ mol } \text{O}_2} \times \frac{80.06 \text{ g } \text{SO}_3}{1 \text{ mol } \text{SO}_3}$$
+$$\approx 17.3 \text{ g } \text{SO}_3$$
+
+<strong>Conclusion: SO₂ is the limiting reagent, producing 15.5 g SO₃.</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 12 -->
+        <div class="problem-card" id="problem-12">
+            <div class="problem-header">
+                <div class="problem-number">12</div>
+                <div class="problem-title">H₂SO₄ Production</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of sulfuric acid (\(\text{H}_2\text{SO}_4\)) is produced from the reaction of \(6.58 \text{ g}\) of sulfur trioxide (\(\text{SO}_3\)) and \(1.64 \text{ g}\) of water (\(\text{H}_2\text{O}\))?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 12</strong>
+                    <div class="solution-steps">$$\text{SO}_3 + \text{H}_2\text{O} \longrightarrow \text{H}_2\text{SO}_4$$
+
+Mass H₂SO₄ from SO₃:
+$$ 6.58 \text{ g } \text{SO}_3 \times \frac{1 \text{ mol } \text{SO}_3}{80.06 \text{ g}} \times \frac{1 \text{ mol } \text{H}_2\text{SO}_4}{1 \text{ mol } \text{SO}_3} \times \frac{98.08 \text{ g } \text{H}_2\text{SO}_4}{1 \text{ mol } \text{H}_2\text{SO}_4}$$
+$$\approx \mathbf{8.06 \text{ g } \text{H}_2\text{SO}_4}$$
+
+Mass H₂SO₄ from H₂O:
+$$ 1.64 \text{ g } \text{H}_2\text{O} \times \frac{1 \text{ mol } \text{H}_2\text{O}}{18.02 \text{ g}} \times \frac{1 \text{ mol } \text{H}_2\text{SO}_4}{1 \text{ mol } \text{H}_2\text{O}} \times \frac{98.08 \text{ g } \text{H}_2\text{SO}_4}{1 \text{ mol } \text{H}_2\text{SO}_4}$$
+$$\approx 8.93 \text{ g } \text{H}_2\text{SO}_4$$
+
+<strong>Conclusion: SO₃ is the limiting reagent, producing 8.06 g H₂SO₄.</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 13 -->
+        <div class="problem-card" id="problem-13">
+            <div class="problem-header">
+                <div class="problem-number">13</div>
+                <div class="problem-title">CdS Production</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>What mass of cadmium sulfide (\(\text{CdS}\)) is produced if \(8.47 \text{ g}\) of cadmium (\(\text{Cd}\)) reacts with \(2.51 \text{ g}\) of sulfur (\(\text{S}\))?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 13</strong>
+                    <div class="solution-steps">$$\text{Cd} + \text{S} \longrightarrow \text{CdS}$$
+
+Mass CdS from Cd:
+$$ 8.47 \text{ g } \text{Cd} \times \frac{1 \text{ mol } \text{Cd}}{112.41 \text{ g}} \times \frac{1 \text{ mol } \text{CdS}}{1 \text{ mol } \text{Cd}} \times \frac{144.48 \text{ g } \text{CdS}}{1 \text{ mol } \text{CdS}}$$
+$$\approx \mathbf{10.9 \text{ g } \text{CdS}}$$
+
+Mass CdS from S:
+$$ 2.51 \text{ g } \text{S} \times \frac{1 \text{ mol } \text{S}}{32.07 \text{ g}} \times \frac{1 \text{ mol } \text{CdS}}{1 \text{ mol } \text{S}} \times \frac{144.48 \text{ g } \text{CdS}}{1 \text{ mol } \text{CdS}}$$
+$$\approx 11.3 \text{ g } \text{CdS}$$
+
+<strong>Conclusion: Cd is the limiting reagent, producing 10.9 g CdS.</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <h2 class="section-header" id="section-b">Section B: Advanced Stoichiometry and Analysis</h2>
+        
+        <div class="tip-box">
+            These problems require multi-step reasoning.
+        </div>
+        
+        <!-- Problem 14 -->
+        <div class="problem-card" id="problem-14">
+            <div class="problem-header">
+                <div class="problem-number">14</div>
+                <div class="problem-title">Nitrogen Compound Identification</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>Hydroxylammonium chloride (\(\text{NH}_3\text{OH}^+\text{Cl}^-\)) reacts with iron(III) chloride (\(\text{FeCl}_3\)) in solution to produce iron(II) chloride (\(\text{FeCl}_2\)), \(\text{HCl}\), \(\text{H}_2\text{O}\), and a compound of nitrogen. It was found that \(2.00 \text{ g}\) of iron(III) chloride reacted in this way with \(31.0 \text{ mL}\) of \(0.200 \text{ M}\) hydroxylammonium chloride. Suggest a possible formula for the compound of nitrogen so produced.</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 14</strong>
+                    <div class="solution-steps">Moles NH₃OH⁺Cl⁻ = 0.0310 L × 0.200 M = 0.0062 mol
+Moles FeCl₃ = 2.00 g / 162.204 g/mol ≈ 0.01233 mol
+
+The molar ratio FeCl₃ : NH₃OH⁺Cl⁻ is approximately 2:1.
+
+Fe³⁺ gains 1 electron (Fe³⁺ → Fe²⁺). Since 2 Fe³⁺ are reduced per 1 N atom, 
+the N atom must lose 2 electrons.
+
+Initial oxidation state of N in NH₃OH⁺Cl⁻ is -1.
+Final oxidation state = (-1) - (loss of 2e⁻) = +1.
+
+A compound with N in the +1 oxidation state is N₂O.
+
+<strong>Possible Formula: N₂O</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 15 -->
+        <div class="problem-card" id="problem-15">
+            <div class="problem-header">
+                <div class="problem-number">15</div>
+                <div class="problem-title">Counting Phosphate Ions</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>How many phosphate ions (\(\text{PO}_4^{3-}\)) are in a sample of hydroxyapatite [\(\text{Ca}_5(\text{PO}_4)_3\text{OH}\)] that contains \(5.50 \times 10^{-3} \text{ grams}\) of oxygen?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 15</strong>
+                    <div class="solution-steps">Moles O atoms = 5.50 × 10⁻³ g / 16.00 g/mol ≈ 3.4375 × 10⁻⁴ mol
+
+The molar ratio of Ca₅(PO₄)₃OH to O atoms is 1:13.
+Moles Ca₅(PO₄)₃OH = (3.4375 × 10⁻⁴ mol O) / 13 ≈ 2.644 × 10⁻⁵ mol
+
+Moles PO₄³⁻ (1:3 ratio) = (2.644 × 10⁻⁵ mol) × 3 ≈ 7.933 × 10⁻⁵ mol
+
+Number of ions = (7.933 × 10⁻⁵ mol) × (6.022 × 10²³ ions/mol)
+
+<strong>≈ 4.78 × 10¹⁹ ions</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 16 -->
+        <div class="problem-card" id="problem-16">
+            <div class="problem-header">
+                <div class="problem-number">16</div>
+                <div class="problem-title">Gravimetric Analysis of a Mixture (1)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>A mixture consisting of only sodium chloride (\(\text{NaCl}\)) and potassium chloride (\(\text{KCl}\)) weighs \(1.0000 \text{ g}\). When the mixture is dissolved in water and an excess of silver nitrate is added, all the chloride ions are precipitated as insoluble silver chloride (\(\text{AgCl}\)). The mass of the silver chloride is found to be \(2.1476 \text{ g}\). Calculate the mass percentages of sodium chloride and potassium chloride in the original mixture.</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 16</strong>
+                    <div class="solution-steps">Let x = mass of NaCl. (1.0000 - x) = mass of KCl.
+MMs: NaCl (58.44), KCl (74.55), AgCl (143.32).
+
+Set up mass balance based on AgCl precipitation:
+$$ \frac{x}{58.44} \times 143.32 + \frac{(1.0000 - x)}{74.55} \times 143.32 = 2.1476 $$
+
+$$ 2.452x + 1.922(1 - x) = 2.1476 $$
+$$ 0.530x = 0.2256 $$
+$$ x \approx 0.4257 \text{ g NaCl} $$
+
+Mass NaCl = 0.4257 g → <strong>42.57%</strong>
+Mass KCl = 1.0000 - 0.4257 = 0.5743 g → <strong>57.43%</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 17 -->
+        <div class="problem-card" id="problem-17">
+            <div class="problem-header">
+                <div class="problem-number">17</div>
+                <div class="problem-title">Gas Stoichiometry (Industrial Ammonia)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>Ammonia is produced industrially by the reaction: \(\text{N}_2 + 3\text{H}_2 \longrightarrow 2\text{NH}_3\). Assuming \(100\%\) yield, what mass of ammonia will be produced from a \(1:1\) molar ratio mixture in a reactor that has a volume of \(8.75 \times 10^3 \text{ L}\) under a total pressure of \(2.75 \times 10^7 \text{ Pa}\) at \(455^\circ\text{C}\)?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 17</strong>
+                    <div class="solution-steps">H₂ is the limiting reagent (need 1:3 ratio, have 1:1).
+T = 728.15 K. P_total ≈ 271.404 atm.
+P_H₂ = 271.404 atm / 2 ≈ 135.702 atm.
+
+Use PV = nRT to find moles of H₂:
+(135.702)(8.75 × 10³) = n(0.08206)(728.15)
+n_H₂ ≈ 19876.1 mol
+
+Moles NH₃ (3:2 ratio): 19876.1 × (2/3) ≈ 13250.7 mol
+Mass NH₃ = 13250.7 mol × 17.031 g/mol ≈ 225669 g
+
+<strong>Mass NH₃ produced: 2.26 × 10⁵ g</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 18 -->
+        <div class="problem-card" id="problem-18">
+            <div class="problem-header">
+                <div class="problem-number">18</div>
+                <div class="problem-title">Hydrated Salt Analysis</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>Upon heating, a \(4.250 \text{ g}\) sample loses \(0.314 \text{ grams}\). Assuming the sample is a mixture of barium chloride dihydrate (\(\text{BaCl}_2 \cdot 2\text{H}_2\text{O}\)) and sodium chloride (\(\text{NaCl}\)), calculate the mass percent of \(\text{BaCl}_2 \cdot 2\text{H}_2\text{O}\).</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 18</strong>
+                    <div class="solution-steps">Mass H₂O lost = 0.314 g.
+Moles H₂O = 0.314 g / 18.015 g/mol ≈ 0.01743 mol
+
+Moles BaCl₂·2H₂O (2:1 ratio) = 0.01743 mol / 2 ≈ 0.008715 mol
+Mass BaCl₂·2H₂O (MM ≈ 244.27 g/mol) = 0.008715 mol × 244.27 g/mol ≈ 2.1288 g
+
+Mass Percent = (2.1288 g / 4.250 g) × 100%
+
+<strong>≈ 50.09%</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 19 -->
+        <div class="problem-card" id="problem-19">
+            <div class="problem-header">
+                <div class="problem-number">19</div>
+                <div class="problem-title">Gravimetric Analysis of a Mixture (2)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>A \(0.6118 \text{ g}\) sample containing only \(\text{MgCl}_2\) and \(\text{NaCl}\) was analyzed by adding \(145.0 \text{ mL}\) of \(0.1006 \text{ M}\) \(\text{AgNO}_3\). The precipitate of \(\text{AgCl}(\text{s})\) formed had a mass of \(1.7272 \text{ g}\). Calculate the mass of each component (\(\text{MgCl}_2\) and \(\text{NaCl}\)) in the original sample.</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 19</strong>
+                    <div class="solution-steps">Let x = mass NaCl and y = mass MgCl₂. 
+(MMs: NaCl 58.44, MgCl₂ 95.21, AgCl 143.32)
+
+1. Total Moles Cl⁻ = Moles AgCl = 1.7272 g / 143.321 g/mol ≈ 0.012051 mol
+
+2. Set up system of equations:
+   I) x + y = 0.6118
+   II) x/58.443 + 2y/95.211 = 0.012051 (Total Moles Cl⁻)
+
+3. Substitute y = 0.6118 - x into (II) and solve for x:
+   x ≈ 0.2055 g
+
+Mass NaCl = <strong>0.2055 g</strong>
+Mass MgCl₂ = 0.6118 - 0.2055 = <strong>0.4063 g</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 20 -->
+        <div class="problem-card" id="problem-20">
+            <div class="problem-header">
+                <div class="problem-number">20</div>
+                <div class="problem-title">Comparison of O₂ Yields</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>Ammonium nitrate (\(\text{NH}_4\text{NO}_3\)) and potassium chlorate (\(\text{KClO}_3\)) both produce oxygen gas when decomposed by heating. Determine which of the two yields the greater:</p>
+                <p>(a) number of moles of \(\text{O}_2\) per mole of solid.</p>
+                <p>(b) number of grams of \(\text{O}_2\) per gram of solid.</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 20</strong>
+                    <div class="solution-steps">Balanced equations:
+(A) 2NH₄NO₃ → 2N₂ + O₂ + 4H₂O
+(B) 2KClO₃ → 2KCl + 3O₂
+
+(a) Moles O₂ per mole solid:
+• NH₄NO₃: 1/2 = 0.5 mol
+• KClO₃: 3/2 = 1.5 mol
+<strong>Answer (a): KClO₃</strong>
+
+(b) Grams O₂ per gram solid:
+• NH₄NO₃: Mass Ratio = 32.0 g O₂ / 160.1 g Solid ≈ 0.20 g/g
+• KClO₃: Mass Ratio = 96.0 g O₂ / 245.1 g Solid ≈ 0.39 g/g
+<strong>Answer (b): KClO₃</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 21 -->
+        <div class="problem-card" id="problem-21">
+            <div class="problem-header">
+                <div class="problem-number">21</div>
+                <div class="problem-title">Atomic Mass Determination (XCl₂ to XCl₄)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>An element \(\text{X}\) forms both a dichloride (\(\text{XCl}_2\)) and a tetrachloride (\(\text{XCl}_4\)). Treatment of \(10.00 \text{ g}\) \(\text{XCl}_2\) with excess chlorine forms \(12.55 \text{ g}\) \(\text{XCl}_4\). Calculate the atomic mass of \(\text{X}\), and identify \(\text{X}\).</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 21</strong>
+                    <div class="solution-steps">$$\text{XCl}_2 + \text{Cl}_2 \longrightarrow \text{XCl}_4$$
+
+1. Mass Cl₂ reacted = 12.55 g - 10.00 g = 2.55 g.
+2. Moles Cl₂ = 2.55 g / 70.906 g/mol ≈ 0.035963 mol.
+3. Moles XCl₂ (1:1 ratio) = 0.035963 mol.
+4. Molar Mass XCl₂ = 10.00 g / 0.035963 mol ≈ 278.06 g/mol.
+5. Atomic Mass X = 278.06 - (2 × 35.453) ≈ 207.15 g/mol.
+
+<strong>Atomic Mass ≈ 207.2 g/mol; Element X is Lead (Pb).</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 22 -->
+        <div class="problem-card" id="problem-22">
+            <div class="problem-header">
+                <div class="problem-number">22</div>
+                <div class="problem-title">Hydration and Empirical Formula (UF₆)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>Water is added to \(4.267 \text{ g}\) of \(\text{UF}_6\). The only products are \(3.730 \text{ g}\) of a solid containing only uranium, oxygen, and fluorine (\(\text{U}\), \(\text{O}\), \(\text{F}\)) and \(0.970 \text{ g}\) of a gas. The gas is \(95.0\%\) fluorine and the remainder is hydrogen.</p>
+                <p>(a) What fraction of the fluorine of the original is in the solid and what fraction in the gas after the reaction?</p>
+                <p>(b) What is the formula of the solid product?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 22</strong>
+                    <div class="solution-steps">(a) Fluorine Distribution:
+1. Total initial F mass ≈ 1.3817 g.
+2. Mass F_gas = 0.970 g × 0.950 = 0.9215 g.
+3. Fraction in Solid = (1.3817 - 0.9215) / 1.3817 ≈ <strong>33.30%</strong>
+4. Fraction in Gas = 0.9215 / 1.3817 ≈ <strong>66.70%</strong>
+
+(b) Formula U_xO_yF_z:
+1. Mass H₂O reacted = (3.730 + 0.970) - 4.267 = 0.433 g.
+2. Mass O_solid = 0.433 g H₂O × (15.999 / 18.015) ≈ 0.3845 g.
+3. Mass U_solid = 3.730 - 0.9215 (in gas) - 0.3845 (O) ≈ 2.8853 g.
+4. Moles (U: 0.01212) : (F: 0.02422) : (O: 0.02403)
+5. Ratio ≈ 1:2:2.
+
+<strong>Formula of the Solid Product: UF₂O₂</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 23 -->
+        <div class="problem-card" id="problem-23">
+            <div class="problem-header">
+                <div class="problem-number">23</div>
+                <div class="problem-title">Empirical Formula from Products (Ti and Cl)</div>
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </div>
+            <div class="problem-content">
+                <p>A compound containing titanium and chlorine is analyzed by converting all the titanium into \(1.20 \text{ g}\) of titanium dioxide (\(\text{TiO}_2\)) and all the chlorine into \(6.45 \text{ g}\) of \(\text{AgCl}\). What is the simplest (empirical) formula for the original compound?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 23</strong>
+                    <div class="solution-steps">1. Moles Ti = Moles TiO₂ = 1.20 g / 79.90 g/mol ≈ 0.01502 mol
+2. Moles Cl = Moles AgCl = 6.45 g / 143.32 g/mol ≈ 0.04500 mol
+3. Mole ratio Ti:Cl = 0.01502 : 0.04500.
+4. Dividing by 0.01502 gives 1:3.
+
+<strong>Empirical Formula: TiCl₃</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 24 -->
+        <div class="problem-card" id="problem-24">
+            <div class="problem-header">
+                <div class="problem-number">24</div>
+                <div class="problem-title">Atomic Mass Determination (XBr₂ to XCl₂)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>An unknown element \(\text{X}\) is found in two compounds, \(\text{XCl}_2\) and \(\text{XBr}_2\). In the following reaction: \(\text{XBr}_2 + \text{Cl}_2 \longrightarrow \text{XCl}_2 + \text{Br}_2\), when \(1.5000 \text{ g}\) \(\text{XBr}_2\) is used, \(0.8897 \text{ g}\) \(\text{XCl}_2\) is formed. Identify the element \(\text{X}\).</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 24</strong>
+                    <div class="solution-steps">Since the ratio is 1:1, Moles XBr₂ = Moles XCl₂.
+Let x = Atomic Mass of X.
+
+$$\frac{1.5000}{x + (2 \times 79.904)} = \frac{0.8897}{x + (2 \times 35.453)}$$
+
+$$\frac{1.5000}{x + 159.808} = \frac{0.8897}{x + 70.906}$$
+
+Solving for x: 0.6103x = 35.822
+x ≈ 58.70 g/mol.
+
+<strong>Atomic Mass ≈ 58.70 g/mol; Element X is Nickel (Ni).</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 25 -->
+        <div class="problem-card" id="problem-25">
+            <div class="problem-header">
+                <div class="problem-number">25</div>
+                <div class="problem-title">Mixed Oxide Products</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>When the supply of oxygen is limited, iron metal reacts with oxygen to produce a mixture of \(\text{FeO}\) and \(\text{Fe}_2\text{O}_3\). In a certain experiment, \(20.00 \text{ g}\) of iron metal was reacted with \(11.20 \text{ g}\) of oxygen gas. After the experiment, the iron was totally consumed and \(3.24 \text{ g}\) oxygen gas remained. Calculate the amounts (masses) of \(\text{FeO}\) and \(\text{Fe}_2\text{O}_3\) formed in this experiment.</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 25</strong>
+                    <div class="solution-steps">1. Moles O₂ reacted = (11.20 - 3.24) g / 31.999 g/mol ≈ 0.24876 mol.
+2. Total Moles Fe = 20.00 g / 55.845 g/mol ≈ 0.35815 mol.
+3. Let a = moles Fe for FeO and b = moles Fe for Fe₂O₃.
+   I) a + b = 0.35815
+   II) 0.5a + 0.75b = 0.24876
+4. Solving: a ≈ 0.0794 mol Fe and b ≈ 0.27875 mol Fe.
+5. Mass FeO (Moles FeO = a) = 0.0794 mol × 71.844 g/mol ≈ <strong>5.71 g</strong>
+6. Mass Fe₂O₃ (Moles Fe₂O₃ = b/2) = (0.27875/2) mol × 159.688 g/mol ≈ <strong>22.25 g</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 26 -->
+        <div class="problem-card" id="problem-26">
+            <div class="problem-header">
+                <div class="problem-number">26</div>
+                <div class="problem-title">Solution Stoichiometry (Rust Cleaning)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>A sheet of iron with a surface area of \(525 \text{ cm}^2\) is covered with a coating of rust (\(\text{Fe}_2\text{O}_3\), density \(5.2 \text{ g/cm}^3\)) that has an average thickness of \(0.0021 \text{ cm}\). What minimum volume of an \(\text{HCl}\) solution, in \(\text{mL}\), having a density of \(1.07 \text{ g/mL}\) and consisting of \(14\%\) \(\text{HCl}\) by mass is required to clean the surface?</p>
+                <div class="equation-box">
+                    $$\text{Fe}_2\text{O}_3(\text{s}) + 6\text{HCl}(\text{aq}) \longrightarrow 2\text{FeCl}_3(\text{aq}) + 3\text{H}_2\text{O}(\ell)$$
+                </div>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 26 (Dimensional Analysis)</strong>
+                    <div class="solution-steps">Mass of Rust = 525 cm² × 0.0021 cm × 5.2 g/cm³ = 5.733 g Fe₂O₃
+
+$$ 5.733 \text{ g } \text{Fe}_2\text{O}_3 \times \left( \frac{1 \text{ mol }}{159.69 \text{ g}} \right) \times \left( \frac{6 \text{ mol } \text{HCl}}{1 \text{ mol } \text{Fe}_2\text{O}_3} \right)$$
+$$\times \left( \frac{36.46 \text{ g } \text{HCl}}{1 \text{ mol }} \right) \times \left( \frac{100 \text{ g Soln}}{14 \text{ g } \text{HCl}} \right) \times \left( \frac{1 \text{ mL}}{1.07 \text{ g Soln}} \right) $$
+
+<strong>Volume Solution ≈ 52.4 mL</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Problem 27 -->
+        <div class="problem-card" id="problem-27">
+            <div class="problem-header">
+                <div class="problem-number">27</div>
+                <div class="problem-title">Atomic Mass Determination (Precipitation)</div>
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </div>
+            <div class="problem-content">
+                <p>A \(1.42 \text{ g}\) sample of a pure compound, with formula \(\text{M}_2\text{SO}_4\), was dissolved in water and treated with an excess of aqueous calcium chloride, resulting in the precipitation of all the sulfate ions as calcium sulfate (\(\text{CaSO}_4\)). The precipitate was collected, dried, and found to weigh \(1.36 \text{ g}\). Determine the atomic mass of \(\text{M}\). What element is it?</p>
+            </div>
+            <details class="solution-container">
+                <summary class="solution-toggle">Show Solution</summary>
+                <div class="solution-content">
+                    <strong>✅ Solution to Problem 27</strong>
+                    <div class="solution-steps">$$\text{M}_2\text{SO}_4 + \text{CaCl}_2 \longrightarrow \text{CaSO}_4 + 2\text{MCl}$$
+
+1. Moles SO₄²⁻ = Moles CaSO₄ = 1.36 g / 136.14 g/mol ≈ 0.0099897 mol
+2. Moles M₂SO₄ = 0.0099897 mol
+3. Molar Mass M₂SO₄ = 1.42 g / 0.0099897 mol ≈ 142.15 g/mol
+4. Mass M₂ = 142.15 - 96.06 (MM_SO₄) = 46.09 g/mol
+5. Atomic Mass M = 46.09 / 2 ≈ 23.05 g/mol
+
+<strong>Atomic Mass ≈ 23.0 g/mol; Element M is Sodium (Na).</strong></div>
+                </div>
+            </details>
+        </div>
+        
+        <div class="info-box">
+            <strong>🎉 Congratulations!</strong><br>
+            You've completed all 27 problems! Remember to review the solutions carefully and practice dimensional analysis regularly. Stoichiometry is all about careful bookkeeping and unit conversions!
+        </div>
+        
+    </div>
+</div>
+
+<!-- Back to Top Button -->
+<a href="#" class="back-to-top" id="backToTop">↑</a>
+
+<script>
+    // Back to Top Button functionality
+    window.addEventListener('scroll', function() {
+        const backToTop = document.getElementById('backToTop');
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
